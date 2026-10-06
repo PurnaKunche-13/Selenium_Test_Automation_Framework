@@ -1,0 +1,62 @@
+$ java build-tools/JavaSyntaxCheck.java upgrade/selenium-test-automation-framework
+exit=0
+Java 17 syntax parse: 34 files, 0 errors. No type checking or dependency resolution performed.
+
+
+$ java --module jdk.compiler/com.sun.tools.javac.Main --release 17 -d upgrade/selenium-test-automation-framework/target/component-check upgrade/selenium-test-automation-framework/src/test/java/com/purna/automation/utilities/ConfigReader.java upgrade/selenium-test-automation-framework/src/test/java/com/purna/automation/utilities/RetryBudget.java upgrade/selenium-test-automation-framework/src/test/java/com/purna/automation/utilities/SafeDiagnostics.java upgrade/selenium-test-automation-framework/tools/ComponentChecks.java
+exit=0
+
+
+$ java -cp upgrade/selenium-test-automation-framework/target/component-check:upgrade/selenium-test-automation-framework/src/test/resources ComponentChecks
+exit=0
+Feature 1: compiled ConfigReader; 8 profile/precedence assertions passed.
+Feature 3: compiled RetryBudget; 6 assertions passed, including 50 concurrent reservations.
+Feature 4: compiled SafeDiagnostics; 6 URL/exception/header safety assertions passed.
+
+
+$ java -cp upgrade/selenium-test-automation-framework/target/component-check:upgrade/selenium-test-automation-framework/src/test/resources ComponentChecks environment
+exit=0
+Environment precedence probe: 3 assertions passed.
+
+
+Static validation: 11 XML files parsed; 8 JSON data files parsed; workflow YAML parsed; all explicit suite classes/listeners resolve to source files. This does not validate Java dependency types or run TestNG.
+
+$ mvn test-compile
+exit=127
+[Errno 2] No such file or directory: 'mvn'
+
+$ mvn clean test
+exit=127
+[Errno 2] No such file or directory: 'mvn'
+
+$ mvn test -DsuiteXmlFile=suites/smoke.xml
+exit=127
+[Errno 2] No such file or directory: 'mvn'
+
+$ mvn test -DsuiteXmlFile=suites/regression.xml
+exit=127
+[Errno 2] No such file or directory: 'mvn'
+
+$ mvn test -DsuiteXmlFile=suites/ui.xml
+exit=127
+[Errno 2] No such file or directory: 'mvn'
+
+$ mvn test -DsuiteXmlFile=suites/api.xml
+exit=127
+[Errno 2] No such file or directory: 'mvn'
+
+$ mvn test -DsuiteXmlFile=suites/parallel.xml
+exit=127
+[Errno 2] No such file or directory: 'mvn'
+
+$ mvn test -DsuiteXmlFile=suites/self-check.xml
+exit=127
+[Errno 2] No such file or directory: 'mvn'
+
+$ mvn test -DsuiteXmlFile=suites/diagnostics.xml
+exit=127
+[Errno 2] No such file or directory: 'mvn'
+
+$ mvn test -DsuiteXmlFile=suites/browser-self-check.xml
+exit=127
+[Errno 2] No such file or directory: 'mvn'

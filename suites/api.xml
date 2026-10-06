@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
+<suite name="API regression">
+  <listeners>
+    <listener class-name="com.purna.automation.listeners.RetryTransformer"/>
+    <listener class-name="com.purna.automation.listeners.TestListener"/>
+  </listeners>
+  <test name="API regression tests">
+    <groups><run><include name="api"/></run></groups>
+    <classes>
+      <class name="com.purna.automation.api.ApiTest"/>
+    </classes>
+  </test>
+</suite>

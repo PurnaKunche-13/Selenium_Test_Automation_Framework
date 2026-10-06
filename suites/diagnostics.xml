@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
+<suite name="Intentional failure diagnostic">
+  <listeners>
+    <listener class-name="com.purna.automation.listeners.RetryTransformer"/>
+    <listener class-name="com.purna.automation.listeners.TestListener"/>
+  </listeners>
+  <test name="Intentional failure diagnostic tests">
+
+    <classes>
+      <class name="com.purna.automation.framework.FailureEvidenceTest"/>
+    </classes>
+  </test>
+</suite>

@@ -1,0 +1,89 @@
+name: UI and API automation
+on:
+  push:
+    branches: [main, master]
+  pull_request:
+  workflow_dispatch:
+    inputs:
+      suite:
+        description: Business suite to execute
+        type: choice
+        options: [smoke, regression]
+        default: regression
+      browser:
+        description: Installed UI browser
+        type: choice
+        options: [chrome, firefox, edge]
+        default: chrome
+      environment:
+        description: Framework configuration profile
+        type: choice
+        options: [local, qa, stage]
+        default: local
+permissions:
+  contents: read
+concurrency:
+  group: automation-${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+jobs:
+  regression:
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    env:
+      AUTOMATION_HEADLESS: 'true'
+      AUTOMATION_BROWSER: ${{ inputs.browser || 'chrome' }}
+      AUTOMATION_ENV: ${{ inputs.environment || 'local' }}
+      AUTOMATION_MAX_RETRIES: '1'
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v7
+        with:
+          persist-credentials: false
+      - name: Set up Java 17 and Maven dependency cache
+        uses: actions/setup-java@v6
+        with:
+          distribution: temurin
+          java-version: '17'
+          cache: maven
+      - name: Verify tools and browser
+        run: |
+          java -version
+          mvn -version
+          case "$AUTOMATION_BROWSER" in
+            chrome) google-chrome --version ;;
+            firefox) firefox --version ;;
+            edge) microsoft-edge --version ;;
+          esac
+      - name: Resolve Maven dependencies and compile
+        run: mvn -B -ntp test-compile
+      - name: Run local framework checks
+        run: mvn -B -ntp test -DsuiteXmlFile=suites/self-check.xml
+      - name: Validate browser isolation and waits
+        run: mvn -B -ntp test -DsuiteXmlFile=suites/browser-self-check.xml
+      - name: Run selected headless business suite
+        env:
+          SELECTED_SUITE: ${{ inputs.suite || 'regression' }}
+        run: |
+          case "$SELECTED_SUITE" in
+            smoke|regression) mvn -B -ntp test "-DsuiteXmlFile=suites/$SELECTED_SUITE.xml" ;;
+            *) exit 2 ;;
+          esac
+      - name: Upload reports and logs
+        if: always()
+        uses: actions/upload-artifact@v7
+        with:
+          name: test-reports-${{ github.run_number }}-${{ github.run_attempt }}
+          path: |
+            reports/
+            logs/
+            target/surefire-reports/
+          if-no-files-found: warn
+          retention-days: 14
+      - name: Upload failure screenshots
+        if: always()
+        uses: actions/upload-artifact@v7
+        with:
+          name: failure-screenshots-${{ github.run_number }}-${{ github.run_attempt }}
+          path: screenshots/**/*.png
+          if-no-files-found: ignore
+          retention-days: 14

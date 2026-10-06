@@ -1,0 +1,23 @@
+[
+  {
+    "id": "TC021",
+    "firstName": "",
+    "lastName": "Tester",
+    "postalCode": "533001",
+    "error": "Error: First Name is required"
+  },
+  {
+    "id": "TC022",
+    "firstName": "Purna",
+    "lastName": "",
+    "postalCode": "533001",
+    "error": "Error: Last Name is required"
+  },
+  {
+    "id": "TC023",
+    "firstName": "Purna",
+    "lastName": "Tester",
+    "postalCode": "",
+    "error": "Error: Postal Code is required"
+  }
+]

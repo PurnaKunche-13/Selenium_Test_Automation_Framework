@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
+<suite name="Smoke">
+  <listeners>
+    <listener class-name="com.purna.automation.listeners.RetryTransformer"/>
+    <listener class-name="com.purna.automation.listeners.TestListener"/>
+  </listeners>
+  <test name="Smoke tests">
+    <groups><run><include name="smoke"/></run></groups>
+    <classes>
+      <class name="com.purna.automation.tests.LoginTest"/>
+      <class name="com.purna.automation.tests.ProductsTest"/>
+      <class name="com.purna.automation.tests.CartTest"/>
+      <class name="com.purna.automation.tests.CheckoutTest"/>
+      <class name="com.purna.automation.tests.RegressionTest"/>
+      <class name="com.purna.automation.api.ApiTest"/>
+    </classes>
+  </test>
+</suite>

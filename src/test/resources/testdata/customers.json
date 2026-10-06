@@ -1,0 +1,14 @@
+[
+  {
+    "id": "TC040",
+    "firstName": "Purna",
+    "lastName": "Tester",
+    "postalCode": "533001"
+  },
+  {
+    "id": "TC041",
+    "firstName": "Demo",
+    "lastName": "Customer",
+    "postalCode": "10001"
+  }
+]

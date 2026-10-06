@@ -1,0 +1,51 @@
+[
+  {
+    "id": "TC001",
+    "username": "standard_user",
+    "password": "secret_sauce",
+    "successful": true,
+    "error": ""
+  },
+  {
+    "id": "TC002",
+    "username": "unknown_user",
+    "password": "secret_sauce",
+    "successful": false,
+    "error": "Epic sadface: Username and password do not match any user in this service"
+  },
+  {
+    "id": "TC003",
+    "username": "standard_user",
+    "password": "wrong_password",
+    "successful": false,
+    "error": "Epic sadface: Username and password do not match any user in this service"
+  },
+  {
+    "id": "TC004",
+    "username": "locked_out_user",
+    "password": "secret_sauce",
+    "successful": false,
+    "error": "Epic sadface: Sorry, this user has been locked out."
+  },
+  {
+    "id": "TC005",
+    "username": "",
+    "password": "secret_sauce",
+    "successful": false,
+    "error": "Epic sadface: Username is required"
+  },
+  {
+    "id": "TC006",
+    "username": "standard_user",
+    "password": "",
+    "successful": false,
+    "error": "Epic sadface: Password is required"
+  },
+  {
+    "id": "TC033",
+    "username": "performance_glitch_user",
+    "password": "secret_sauce",
+    "successful": true,
+    "error": ""
+  }
+]

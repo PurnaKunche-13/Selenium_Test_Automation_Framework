@@ -1,0 +1,18 @@
+[
+  {
+    "id": "TC030",
+    "payload": {
+      "userId": 1,
+      "title": "Automation portfolio post",
+      "body": "Reusable REST Assured request payload"
+    }
+  },
+  {
+    "id": "TC042",
+    "payload": {
+      "userId": 2,
+      "title": "Second demo post",
+      "body": "A different synthetic payload"
+    }
+  }
+]
